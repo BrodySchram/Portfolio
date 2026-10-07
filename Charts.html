@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Assignment 1: Vega-Lite Variations</title>
-    <!-- These 3 scripts load the Vega-Lite engine directly inside the browser -->
+    <title>Assignment 1: Vega-Lite Studies</title>
+    <!-- Core layout CDNs loading the engines directly in your browser -->
     <script src="https://jsdelivr.net"></script>
     <script src="https://jsdelivr.net"></script>
     <script src="https://jsdelivr.net"></script>
@@ -22,7 +22,7 @@
         <h1>Assignment 1: Vega-Lite Multi-Plot Variation Study</h1>
         
         <div class="meta-info">
-            <strong>Dataset Sourced:</strong> Montgomery County Commercial Liquor Sales Data Snapshot<br>
+            <strong>Dataset Sourced:</strong> Montgomery County Commercial Liquor Sales Snapshot<br>
             <strong>Variables Tracked:</strong> <code>whs_sales</code> (Warehouse Sales), <code>rtl_sales</code> (Retail Sales), and <code>item_type</code> (Product Category).
         </div>
 
@@ -44,7 +44,7 @@
         <div class="chart-box">
             <h2>3. Variation B: Shifting to a Logarithmic Axis Scale</h2>
             <div id="vis3"></div>
-            <p><strong>Decision-Making Process:</strong> Realizing that the tight bottom-left cluster in the previous charts obscured individual rows, I modified both the X and Y axes to use a logarithmic scale. This geometric stretching spreads out the heavily compressed low-tier data records, making dense overlapping rows remarkably easy to hover over and read visually without deleting any extreme sales outliers.</p>
+            <p><strong>Description:</strong> Realizing that the tight bottom-left cluster in the previous charts obscured individual rows, I modified both the X and Y axes to use a logarithmic scale. This geometric stretching spreads out the heavily compressed low-tier data records, making dense overlapping rows remarkably easy to hover over and read visually without deleting any extreme sales outliers.</p>
         </div>
 
         <!-- CHART 4 -->
@@ -56,71 +56,72 @@
     </div>
 
     <script>
-        // Inline dataset snapshot bypassing firewall API blocking issues
-        var liquorData = [
-            {"item_type": "STRGTS", "whs_sales": 10.0, "rtl_sales": 0.0},
-            {"item_type": "STRGTS", "whs_sales": 0.0, "rtl_sales": 4.0},
-            {"item_type": "WINE", "whs_sales": 2.0, "rtl_sales": 0.0},
-            {"item_type": "LIQ", "whs_sales": 1.0, "rtl_sales": 12.0},
-            {"item_type": "BEER", "whs_sales": 320.0, "rtl_sales": 42.0},
-            {"item_type": "LIQ", "whs_sales": 22.0, "rtl_sales": 104.0},
-            {"item_type": "WINE", "whs_sales": 55.0, "rtl_sales": 18.0},
-            {"item_type": "BEER", "whs_sales": 1400.0, "rtl_sales": 210.0},
-            {"item_type": "WINE", "whs_sales": 80.0, "rtl_sales": 65.0},
-            {"item_type": "LIQ", "whs_sales": 4.0, "rtl_sales": 88.0},
-            {"item_type": "STRGTS", "whs_sales": 15.0, "rtl_sales": 3.0},
-            {"item_type": "WINE", "whs_sales": 120.0, "rtl_sales": 95.0},
-            {"item_type": "BEER", "whs_sales": 2100.0, "rtl_sales": 180.0},
-            {"item_type": "LIQ", "whs_sales": 45.0, "rtl_sales": 310.0},
-            {"item_type": "WINE", "whs_sales": 340.0, "rtl_sales": 140.0},
-            {"item_type": "BEER", "whs_sales": 950.0, "rtl_sales": 85.0},
-            {"item_type": "LIQ", "whs_sales": 12.0, "rtl_sales": 190.0},
-            {"item_type": "WINE", "whs_sales": 15.0, "rtl_sales": 40.0}
-        ];
+        // Formatted structured data matching Vega array properties
+        var liquorData = {
+            "values": [
+                {"item_type": "STRGTS", "whs_sales": 10, "rtl_sales": 5},
+                {"item_type": "STRGTS", "whs_sales": 5, "rtl_sales": 4},
+                {"item_type": "WINE", "whs_sales": 25, "rtl_sales": 15},
+                {"item_type": "LIQ", "whs_sales": 18, "rtl_sales": 12},
+                {"item_type": "BEER", "whs_sales": 320, "rtl_sales": 42},
+                {"item_type": "LIQ", "whs_sales": 22, "rtl_sales": 104},
+                {"item_type": "WINE", "whs_sales": 55, "rtl_sales": 18},
+                {"item_type": "BEER", "whs_sales": 400, "rtl_sales": 210},
+                {"item_type": "WINE", "whs_sales": 80, "rtl_sales": 65},
+                {"item_type": "LIQ", "whs_sales": 34, "rtl_sales": 88},
+                {"item_type": "STRGTS", "whs_sales": 15, "rtl_sales": 3},
+                {"item_type": "WINE", "whs_sales": 120, "rtl_sales": 95},
+                {"item_type": "BEER", "whs_sales": 600, "rtl_sales": 180},
+                {"item_type": "LIQ", "whs_sales": 45, "rtl_sales": 110},
+                {"item_type": "WINE", "whs_sales": 340, "rtl_sales": 140},
+                {"item_type": "BEER", "whs_sales": 450, "rtl_sales": 85},
+                {"item_type": "LIQ", "whs_sales": 72, "rtl_sales": 190},
+                {"item_type": "WINE", "whs_sales": 115, "rtl_sales": 40}
+            ]
+        };
 
-        // Chart 1 Configuration
+        // Render configuration specifications
+        var opt = { "mode": "vega-lite", "actions": true };
+
         var spec1 = {
             "$schema": "https://github.io",
-            "width": 500, "height": 300,
-            "data": { "values": liquorData },
-            "mark": {"type": "circle", "tooltip": true, "size": 100},
+            "width": 450, "height": 280,
+            "data": liquorData,
+            "mark": {"type": "circle", "size": 100, "tooltip": true},
             "encoding": {
-                "x": {"field": "whs_sales", "type": "quantitative", "title": "Warehouse Sales Volume"},
-                "y": {"field": "rtl_sales", "type": "quantitative", "title": "Retail Sales Volume"}
+                "x": {"field": "whs_sales", "type": "quantitative", "title": "Warehouse Sales"},
+                "y": {"field": "rtl_sales", "type": "quantitative", "title": "Retail Sales"}
             }
         };
 
-        // Chart 2 Configuration
         var spec2 = {
             "$schema": "https://github.io",
-            "width": 500, "height": 300,
-            "data": { "values": liquorData },
-            "mark": {"type": "circle", "tooltip": true, "size": 100},
+            "width": 450, "height": 280,
+            "data": liquorData,
+            "mark": {"type": "circle", "size": 100, "tooltip": true},
             "encoding": {
-                "x": {"field": "whs_sales", "type": "quantitative", "title": "Warehouse Sales Volume"},
-                "y": {"field": "rtl_sales", "type": "quantitative", "title": "Retail Sales Volume"},
+                "x": {"field": "whs_sales", "type": "quantitative", "title": "Warehouse Sales"},
+                "y": {"field": "rtl_sales", "type": "quantitative", "title": "Retail Sales"},
                 "color": {"field": "item_type", "type": "nominal", "title": "Product Type"}
             }
         };
 
-        // Chart 3 Configuration
         var spec3 = {
             "$schema": "https://github.io",
-            "width": 500, "height": 300,
-            "data": { "values": liquorData },
-            "mark": {"type": "circle", "tooltip": true, "size": 100},
+            "width": 450, "height": 280,
+            "data": liquorData,
+            "mark": {"type": "circle", "size": 100, "tooltip": true},
             "encoding": {
-                "x": {"field": "whs_sales", "type": "quantitative", "scale": {"type": "symlog"}, "title": "Log - Warehouse Sales"},
-                "y": {"field": "rtl_sales", "type": "quantitative", "scale": {"type": "symlog"}, "title": "Log - Retail Sales"},
+                "x": {"field": "whs_sales", "type": "quantitative", "scale": {"type": "symlog"}, "title": "Log (Warehouse Sales)"},
+                "y": {"field": "rtl_sales", "type": "quantitative", "scale": {"type": "symlog"}, "title": "Log (Retail Sales)"},
                 "color": {"field": "item_type", "type": "nominal", "title": "Product Type"}
             }
         };
 
-        // Chart 4 Configuration
         var spec4 = {
             "$schema": "https://github.io",
-            "width": 500, "height": 300,
-            "data": { "values": liquorData },
+            "width": 450, "height": 280,
+            "data": liquorData,
             "mark": {"type": "bar", "tooltip": true},
             "encoding": {
                 "x": {"field": "item_type", "type": "nominal", "title": "Product Category", "axis": {"labelAngle": 0}},
@@ -129,11 +130,12 @@
             }
         };
 
-        // Render all 4 charts live inside the HTML page containers
-        vegaEmbed('#vis1', spec1);
-        vegaEmbed('#vis2', spec2);
-        vegaEmbed('#vis3', spec3);
-        vegaEmbed('#vis4', spec4);
+        // Executing standard embed targets
+        vegaEmbed('#vis1', spec1, opt);
+        vegaEmbed('#vis2', spec2, opt);
+        vegaEmbed('#vis3', spec3, opt);
+        vegaEmbed('#vis4', spec4, opt);
     </script>
 </body>
 </html>
+
