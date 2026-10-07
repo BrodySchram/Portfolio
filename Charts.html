@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 1: Vega-Lite Studies</title>
+    <!-- These three scripts allow your charts to be interactive (zoom, hover, tooltips) -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #fff; color: #333; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; }
+        .chart-box { margin-bottom: 50px; padding: 20px; border: 1px solid #eee; border-radius: 8px; background: #fdfdfd; }
+        h1, h2 { color: #111; }
+        p { color: #555; max-width: 650px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p><a href="index.html">← Back to Portfolio Home</a></p>
+        <h1>Assignment 1: Vega-Lite Multi-Plot Variation Study</h1>
+        <p><strong>Dataset Sourced:</strong> Montgomery County Commercial Liquor Sales API.</p>
+
+        <!-- CHART 1 -->
+        <div class="chart-box">
+            <h2>1. Baseline Plot (Basic Scatter)</h2>
+            <div id="vis1"></div>
+            <p><strong>Description:</strong> This baseline plot maps Retail Sales against Warehouse Sales across our drink supply data using a standard linear scale. It communicates a direct comparison between individual products sold via distinct distribution tracks, demonstrating that most inventory clusters tightly near low baseline volume endpoints.</p>
+        </div>
+
+        <!-- CHART 2 -->
+        <div class="chart-box">
+            <h2>2. Variation A: Adding Color Categorization</h2>
+            <div id="vis2"></div>
+            <p><strong>Description:</strong> In this variation, I retained the baseline spatial coordinates but mapped the categorical feature "Item Type" to the color encoding channel. This shifts communication from basic distribution tracking to product segment classification, highlighting that Beer and Wine account for massive warehouse bulk records while Spirits maintain a wider retail layout spread.</p>
+        </div>
+
+        <!-- CHART 3 -->
+        <div class="chart-box">
+            <h2>3. Variation B: Logarithmic Axis Scale Shift</h2>
+            <div id="vis3"></div>
+            <p><strong>Description:</strong> Here, I altered both the X and Y axes from linear scales to logarithmic scales. This stretches out the bottom quadrants where the massive volume of products sit compressed together. It allows viewers to smoothly zoom and isolate overlaps among lower-selling entries without dropping outliers or warping raw dataset metrics.</p>
+        </div>
+
+        <!-- CHART 4 -->
+        <div class="chart-box">
+            <h2>4. Variation C: Alternative Mark Type (Aggregated Bar)</h2>
+            <div id="vis4"></div>
+            <p><strong>Description:</strong> For the final variation, I swapped out the scatter geometry circles for aggregated bar shapes. Instead of evaluating individual products line-by-line, this plot calculates the average retail performance grouped purely by Item Type categories. It trades fine-grained asset tracking for an immediate, macroscopic group performance summary.</p>
+        </div>
+    </div>
+
+    <script>
+        // Directly pointing to your custom dataset endpoint
+        var dataUrl = "https://montgomerycountymd.gov";
+
+        // Chart 1 Spec
+        var spec1 = {
+            "$schema": "https://github.io",
+            "width": 500, "height": 300,
+            "data": { "url": dataUrl },
+            "mark": "circle",
+            "encoding": {
+                "x": {"field": "whs_sales", "type": "quantitative", "title": "Warehouse Sales Volume"},
+                "y": {"field": "rtl_sales", "type": "quantitative", "title": "Retail Sales Volume"}
+            }
+        };
+
+        // Chart 2 Spec
+        var spec2 = {
+            "$schema": "https://github.io",
+            "width": 500, "height": 300,
+            "data": { "url": dataUrl },
+            "mark": "circle",
+            "encoding": {
+                "x": {"field": "whs_sales", "type": "quantitative", "title": "Warehouse Sales Volume"},
+                "y": {"field": "rtl_sales", "type": "quantitative", "title": "Retail Sales Volume"},
+                "color": {"field": "item_type", "type": "nominal", "title": "Product Category"}
+            }
+        };
+
+        // Chart 3 Spec
+        var spec3 = {
+            "$schema": "https://github.io",
+            "width": 500, "height": 300,
+            "data": { "url": dataUrl },
+            "params": [{
+                "name": "grid",
+                "select": {"type": "interval", "bind": "scales"}
+            }],
+            "mark": "circle",
+            "encoding": {
+                "x": {"field": "whs_sales", "type": "quantitative", "scale": {"type": "symlog"}, "title": "Log Warehouse Sales"},
+                "y": {"field": "rtl_sales", "type": "quantitative", "scale": {"type": "symlog"}, "title": "Log Retail Sales"},
+                "color": {"field": "item_type", "type": "nominal", "title": "Product Category"}
+            }
+        };
+
+        // Chart 4 Spec
+        var spec4 = {
+            "$schema": "https://github.io",
+            "width": 500, "height": 300,
+            "data": { "url": dataUrl },
+            "mark": "bar",
+            "encoding": {
+                "x": {"field": "item_type", "type": "nominal", "title": "Item Type", "axis": {"labelAngle": 0}},
+                "y": {"aggregate": "mean", "field": "rtl_sales", "type": "quantitative", "title": "Average Retail Sales"},
+                "color": {"field": "item_type", "type": "nominal", "legend": null}
+            }
+        };
+
+        // Inject specs into divs live
+        vegaEmbed('#vis1', spec1);
+        vegaEmbed('#vis2', spec2);
+        vegaEmbed('#vis3', spec3);
+        vegaEmbed('#vis4', spec4);
+    </script>
+</body>
+</html>
