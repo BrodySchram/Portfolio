@@ -30,7 +30,7 @@
         .portfolio-one-content { 
             background: #ffffff; 
             padding: 25px; 
-            border-top: 1px solid #ddd; 
+            border-top: none; 
             color: #333333; 
         }
         .chart-block { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
@@ -41,7 +41,7 @@
         .culmen-image { max-width: 420px; width: 100%; display: block; margin: 18px auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
         .intro-box {
             background: #eef8fb;
-            border-left: 4px solid #5a8fa3;
+            border-left: none;
             padding: 14px 16px;
             margin: 14px 0 20px;
             border-radius: 4px;
@@ -67,7 +67,7 @@
                     </div>
 
                     <img class="culmen-image" src="https://data-enhanced.com/wp-content/uploads/2020/06/penguins-image.jpg" alt="Penguins graphic illustrating the data set">
-                    <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill. The lengthwise measurement from the base to the tip along the top of the beak. It is one of the standard measurements used to compare species and individuals.</p>
+                    <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill—the lengthwise measurement from the base to the tip along the top of the beak. It is one of the standard measurements used to compare species and individual morphology.</p>
 
                     <div class="chart-block">
                         <h3>Chart 1: Scatter Plot</h3>
@@ -78,19 +78,19 @@
                     <div class="chart-block">
                         <h3>Variation 1: Smaller & Seprerate Scatter Plots</h3>
                         <div id="chart2" class="chart-container"></div>
-                        <p class="description"><strong>Description:</strong> This variation uses small graphs moving each species into its own panel while preserving similar scale structure for easier comparison across groups.</p>
+                        <p class="description"><strong>Description:</strong> This variation uses small graphs moving each species into its own panel while preserving similar scale structure for each species.</p>
                     </div>
 
                     <div class="chart-block">
                         <h3>Variation 2: Swapped Dimensions &amp; Color Map Heatmap</h3>
                         <div id="chart3" class="chart-container"></div>
-                        <p class="description"><strong> Description:</strong> The numeric axis is swapped out for the categorical species feature, while the displaced measure is encoded by color. This emphasizes group-level differences.</p>
+                        <p class="description"><strong> Description:</strong> The numeric axis is swapped out for the categorical species feature, while the displaced measure is encoded by color. This arrangement emphasizes group-level differences and how a categorical variable can structure the distribution.</p>
                     </div>
 
                     <div class="chart-block">
                         <h3>Variation 3: Simple Bar Chart</h3>
                         <div id="chart4" class="chart-container"></div>
-                        <p class="description"><strong>Description:</strong> This bar chart shows the data by species, showing the average culmen depth for each penguin The Bar chart makes the comparisson simple and shows the longest beaks clearly.</p>
+                        <p class="description"><strong>Description:</strong> This bar chart shows the average culmen depth for each penguin species. The bar mark makes direct comparisons easy and highlights which species have the deepest bills on average.</p>
                     </div>
                 </div>
             </li>
