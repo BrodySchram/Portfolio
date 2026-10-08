@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Data Visualization Portfolio</title>
-    <!-- Core Vega-Lite script tags -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -12,8 +11,6 @@
         .container { max-width: 1200px; margin: auto; display: block; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         h1 { color: #111; }
         .assignment-list { margin-top: 20px; padding-left: 0; list-style-type: none; }
-        
-        /* Portfolio Bar Styling */
         .assignment-item { margin-bottom: 20px; border-radius: 5px; overflow: hidden; background: #99c3d1; }
         .assignment-toggle-btn { 
             width: 100%; 
@@ -30,40 +27,49 @@
         }
         .assignment-toggle-btn:hover { background: #88b2c0; text-decoration: underline; }
         .assignment-subtitle { font-size: 0.75em; font-weight: normal; display: block; margin-top: 3px; color: #333; }
-        
-        /* The Drawer Content Area */
         .portfolio-one-content { 
             background: #ffffff; 
             padding: 25px; 
             border-top: 1px solid #ddd; 
             color: #333333; 
         }
-        
-        /* Chart Layout Blocks */
         .chart-block { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
         .chart-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .chart-container { width: 100%; overflow-x: auto; margin: 15px 0; display: flex; justify-content: center; }
         .description { font-size: 0.9em; line-height: 1.5; color: #444; }
         .disabled-item { padding: 15px; background: #99c3d1; margin-bottom: 20px; border-radius: 5px; font-weight: bold; opacity: 0.7; }
+        .culmen-image { max-width: 420px; width: 100%; display: block; margin: 18px auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+        .intro-box {
+            background: #eef8fb;
+            border-left: 4px solid #5a8fa3;
+            padding: 14px 16px;
+            margin: 14px 0 20px;
+            border-radius: 4px;
+            color: #1e2d33;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Data Visualization Portfolio</h1>
         <p>Brody Schram</p>
-        
+
         <h2>Portfolio Assignments</h2>
         <ul class="assignment-list">
-            
             <li class="assignment-item">
                 <button class="assignment-toggle-btn" onclick="togglePortfolio()">
                     Portfolio 1: Penguin Species Visualizations
                     <span id="toggle-sub" class="assignment-subtitle">Click to collapse open views ▲</span>
                 </button>
-                
+
                 <div id="portfolio1-drawer" class="portfolio-one-content">
-                    <p>This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data metrics. Each chart manipulates structural marks, scales, and grouping methods to reveal different relationships across species and attributes.</p>
-                    
+                    <div class="intro-box">
+                        This portfolio explores how a simple penguin dataset can be reframed through multiple chart designs. The goal is to show how changing the marks, scales, and grouping structure can reveal different patterns in the same biological measurements.
+                    </div>
+
+                    <img class="culmen-image" src="https://data-enhanced.com/wp-content/uploads/2020/06/penguins-image.jpg" alt="Penguins graphic illustrating the data set">
+                    <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill—the lengthwise measurement from the base to the tip along the top of the beak. It is one of the standard measurements used to compare species and individual morphology.</p>
+
                     <div class="chart-block">
                         <h3>Chart 1: The Basic Plot (Standard Scatter Plot)</h3>
                         <div id="chart1" class="chart-container"></div>
@@ -89,11 +95,11 @@
                     </div>
                 </div>
             </li>
-            
+
             <li class="disabled-item">Portfolio 2</li>
             <li class="disabled-item">Portfolio 3</li>
         </ul>
-        
+
         <footer style="margin-top: 50px; font-size: 0.8em; color: #777; border-top: 1px solid #ccc; padding-top: 10px;">
             <p>Portfolio template designed by me. Dataset sourced from standard data repository.</p>
         </footer>
