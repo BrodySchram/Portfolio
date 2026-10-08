@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <style>
         body { font-family: sans-serif; margin: 40px; line-height: 1.6; background: #f5f9fa; color: #000000; }
-        .container { max-width: 850px; margin: auto; display: block; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .container { max-width: 1200px; margin: auto; display: block; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         h1 { color: #111; }
         .assignment-list { margin-top: 20px; padding-left: 0; list-style-type: none; }
         
@@ -42,7 +42,7 @@
         /* Chart Layout Blocks */
         .chart-block { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
         .chart-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .chart-container { width: 100%; overflow-x: auto; margin: 15px 0; }
+        .chart-container { width: 100%; overflow-x: auto; margin: 15px 0; display: flex; justify-content: center; }
         .description { font-size: 0.9em; line-height: 1.5; color: #444; }
         .disabled-item { padding: 15px; background: #99c3d1; margin-bottom: 20px; border-radius: 5px; font-weight: bold; opacity: 0.7; }
     </style>
@@ -128,9 +128,9 @@
         const spec1 = {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
           "data": {"values": penguinDataset},
-          "width": 400,
-          "height": 300,
-          "mark": {"type": "point", "tooltip": true},
+          "width": 550,
+          "height": 400,
+          "mark": {"type": "point", "tooltip": true, "size": 100},
           "encoding": {
             "x": {"field": "bill_length_mm", "type": "quantitative", "title": "Culmen Length (mm)"},
             "y": {"field": "bill_depth_mm", "type": "quantitative", "title": "Culmen Depth (mm)"},
@@ -143,10 +143,10 @@
           "data": {"values": penguinDataset},
           "facet": {"field": "species", "type": "nominal", "title": "Species Breakout"},
           "spec": {
-            "width": 120,
-            "height": 120,
+            "width": 200,
+            "height": 200,
             "params": [{"name": "grid", "select": "interval", "bind": "scales"}],
-            "mark": {"type": "circle", "size": 60, "tooltip": true},
+            "mark": {"type": "circle", "size": 100, "tooltip": true},
             "encoding": {
               "x": {"field": "bill_length_mm", "type": "quantitative", "scale": {"zero": false}, "title": "Length (mm)"},
               "y": {"field": "bill_depth_mm", "type": "quantitative", "scale": {"zero": false}, "title": "Depth (mm)"},
@@ -158,9 +158,9 @@
         const spec3 = {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
           "data": {"values": penguinDataset},
-          "width": 400,
-          "height": 250,
-          "mark": {"type": "tick", "size": 30, "thickness": 2, "tooltip": true},
+          "width": 550,
+          "height": 400,
+          "mark": {"type": "tick", "size": 50, "thickness": 3, "tooltip": true},
           "encoding": {
             "x": {"field": "species", "type": "nominal", "title": "Species Group"},
             "y": {"field": "bill_depth_mm", "type": "quantitative", "title": "Culmen Depth (mm)"},
@@ -169,17 +169,18 @@
         };
 
         const spec4 = {
-"$schema": "github.io",
-"data": {"values": penguinDataset},
-"width": 400, "height": 250,
-"mark": {"type": "bar", "tooltip": true},
-"encoding": {
-"x": {"field": "species", "type": "nominal", "title": "Species Group"},
-"y": {"aggregate": "mean", "field": "bill_depth_mm", "type": "quantitative", "title": "Average Culmen Depth (mm)"},
-"color": {"field": "species", "type": "nominal", "legend": null}
-}
-    };
-    
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "data": {"values": penguinDataset},
+          "width": 550,
+          "height": 400,
+          "mark": {"type": "rect", "tooltip": true},
+          "encoding": {
+            "x": {"field": "bill_length_mm", "type": "quantitative", "bin": {"maxbins": 10}, "title": "Binned Culmen Length (mm)"},
+            "y": {"field": "bill_depth_mm", "type": "quantitative", "bin": {"maxbins": 10}, "title": "Binned Culmen Depth (mm)"},
+            "color": {"aggregate": "count", "type": "quantitative", "scale": {"scheme": "magma"}, "title": "Sample Density Count"},
+            "row": {"field": "species", "type": "nominal", "title": "Species"}
+          }
+        };
 
         const drawer = document.getElementById("portfolio1-drawer");
         const subText = document.getElementById("toggle-sub");
