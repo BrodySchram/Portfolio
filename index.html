@@ -2,38 +2,181 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio</title>
+    <title>Data Visualization Portfolio</title>
+    <!-- Include Vega, Vega-Lite, and Vega-Embed libraries for live rendering -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net"></script>
     <style>
         body { font-family: sans-serif; margin: 40px; line-height: 1.6; background: #f5f9fa; color: #000000; }
-        .container { max-width: 800px; margin: auto; display: block; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .container { max-width: 850px; margin: auto; display: block; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         h1 { color: #111; }
         .assignment-list { margin-top: 20px; padding-left: 0; list-style-type: none; }
-        .assignment-item { margin-bottom: 20px; padding: 15px; background: #99c3d1; border-radius: 5px; }
-        a { color: #000000; text-decoration: none; font-weight: bold; }
-        a:hover { text-decoration: underline; }
+        
+        /* Interactive Toggle List Item Wrapper */
+        .assignment-item { margin-bottom: 20px; border-radius: 5px; overflow: hidden; background: #99c3d1; }
+        .assignment-toggle-btn { 
+            width: 100%; 
+            text-align: left; 
+            background: #99c3d1; 
+            border: none; 
+            padding: 15px; 
+            font-size: 1.15em; 
+            font-weight: bold; 
+            color: #000000; 
+            cursor: pointer; 
+            display: block;
+            outline: none;
+        }
+        .assignment-toggle-btn:hover { background: #88b2c0; text-decoration: underline; }
+        .assignment-subtitle { font-size: 0.75em; font-weight: normal; display: block; margin-top: 3px; color: #333; }
+        
+        /* Collapsible content area (hidden by default) */
+        .portfolio-one-content { 
+            display: none; 
+            background: #ffffff; 
+            padding: 25px; 
+            border-top: 1px solid #ddd; 
+            color: #333333; 
+        }
+        
+        /* Charts layout styles */
+        .chart-block { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
+        .chart-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .chart-container { width: 100%; overflow-x: auto; margin: 15px 0; }
+        .description { font-size: 0.9em; line-height: 1.5; color: #444; }
+        
+        /* Disabled items styling for portfolio 2 & 3 */
+        .disabled-item { padding: 15px; background: #99c3d1; margin-bottom: 20px; border-radius: 5px; font-weight: bold; opacity: 0.7; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Data Visualization Portfolio</h1>
-        <p> Brody Schram</p>
+        <p>Brody Schram</p>
         
         <h2>Portfolio Assignments</h2>
         <ul class="assignment-list">
+            
+            <!-- Portfolio 1 Item with Click-to-Expand Feature -->
             <li class="assignment-item">
-                <!-- This links directly to your charts page -->
-                <a href="charts.html">Portfolio 1</a>
-                <br><small>.</small>
+                <button class="assignment-toggle-btn" onclick="togglePortfolio()">
+                    Portfolio 1: Penguin Species Visualizations
+                    <span class="assignment-subtitle">Click to expand/collapse interactive Vega-Lite charts exploration.</span>
+                </button>
+                
+                <!-- Hidden Container until clicked -->
+                <div id="portfolio1-drawer" class="portfolio-one-content">
+                    <p>This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data metrics. Each chart manipulates structural marks, scales, and dimensional axes to shift how the biological insights are communicated.</p>
+                    
+                    <!-- Chart 1 -->
+                    <div class="chart-block">
+                        <h3>Chart 1: The Basic Plot (Standard Scatter Plot)</h3>
+                        <div id="chart1" class="chart-container"></div>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This plot establishes the baseline relationship between physical attributes across different categorical groups. A scatter plot cleanly tracks two continuous metrics simultaneously across a nominal category using color.</p>
+                    </div>
+
+                    <!-- Chart 2 -->
+                    <div class="chart-block">
+                        <h3>Variation 1: Faceted Grid &amp; Zoomable Axis Scale</h3>
+                        <div id="chart2" class="chart-container"></div>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This variation addresses overplotting by utilizing small-multiples structural faceting, moving the species dimension from color encoding to separate charts. The zoom feature lets users scale into the grids directly.</p>
+                    </div>
+
+                    <!-- Chart 3 -->
+                    <div class="chart-block">
+                        <h3>Variation 2: Swapped Dimensions &amp; Color Map Heatmap</h3>
+                        <div id="chart3" class="chart-container"></div>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> One numeric axis is swapped out for the categorical species feature, while the displaced metric is pushed onto a color ramp (Viridis) to create a clear density visualization.</p>
+                    </div>
+
+                    <!-- Chart 4 -->
+                    <div class="chart-block">
+                        <h3>Variation 3: Binned Aggregation Matrix</h3>
+                        <div id="chart4" class="chart-container"></div>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This layout shifts focus away from individual coordinates to macro statistical aggregates. It divides the fields into grids and encodes sample count frequencies using a heatmap spectrum.</p>
+                    </div>
+                </div>
             </li>
             
-            <li class="assignment-item" style="color: #000000; background: #99c3d1;">Portfolio 2</li>
-            <li class="assignment-item" style="color: #000000; background: #99c3d1;">Portfolio 3</li>
+            <!-- Other Portfolio placeholders -->
+            <li class="disabled-item">Portfolio 2</li>
+            <li class="disabled-item">Portfolio 3</li>
         </ul>
         
         <footer style="margin-top: 50px; font-size: 0.8em; color: #777; border-top: 1px solid #ccc; padding-top: 10px;">
             <p>Portfolio template designed by me. Dataset sourced from standard data repository.</p>
         </footer>
     </div>
-</body>
-</html>
 
+    <script>
+        // Use a CORS-safe web URL for seamless loading across all execution environments
+        const dataUrl = "https://githubusercontent.com";
+
+        // Chart Specs mapped to safe online keys (bill_length_mm, bill_depth_mm)
+        const spec1 = {
+          "$schema": "https://github.io",
+          "data": {"url": dataUrl},
+          "width": 400, "height": 300,
+          "mark": {"type": "point", "tooltip": true},
+          "encoding": {
+            "x": {"field": "bill_length_mm", "type": "quantitative", "title": "Culmen Length (mm)"},
+            "y": {"field": "bill_depth_mm", "type": "quantitative", "title": "Culmen Depth (mm)"},
+            "color": {"field": "species", "type": "nominal", "title": "Species"}
+          }
+        };
+
+        const spec2 = {
+          "$schema": "https://github.io",
+          "data": {"url": dataUrl},
+          "facet": {"field": "species", "type": "nominal", "title": "Species Breakout"},
+          "spec": {
+            "width": 140, "height": 140,
+            "params": [{"name": "grid", "select": "interval", "bind": "scales"}],
+            "mark": {"type": "circle", "size": 60, "tooltip": true},
+            "encoding": {
+              "x": {"field": "bill_length_mm", "type": "quantitative", "scale": {"zero": false}, "title": "Culmen Length (mm)"},
+              "y": {"field": "bill_depth_mm", "type": "quantitative", "scale": {"zero": false}, "title": "Culmen Depth (mm)"},
+              "color": {"field": "species", "type": "nominal", "legend": null}
+            }
+          }
+        };
+
+        const spec3 = {
+          "$schema": "https://github.io",
+          "data": {"url": dataUrl},
+          "width": 400, "height": 300,
+          "mark": {"type": "tick", "size": 30, "thickness": 2, "tooltip": true},
+          "encoding": {
+            "x": {"field": "species", "type": "nominal", "title": "Species Group"},
+            "y": {"field": "bill_depth_mm", "type": "quantitative", "title": "Culmen Depth (mm)"},
+            "color": {"field": "bill_length_mm", "type": "quantitative", "scale": {"scheme": "viridis"}, "title": "Culmen Length (mm)"}
+          }
+        };
+
+        const spec4 = {
+          "$schema": "https://github.io",
+          "data": {"url": dataUrl},
+          "width": 400, "height": 250,
+          "mark": {"type": "rect", "tooltip": true},
+          "encoding": {
+            "x": {"field": "bill_length_mm", "type": "quantitative", "bin": {"maxbins": 15}, "title": "Binned Culmen Length (mm)"},
+            "y": {"field": "bill_depth_mm", "type": "quantitative", "bin": {"maxbins": 15}, "title": "Binned Culmen Depth (mm)"},
+            "color": {"aggregate": "count", "type": "quantitative", "scale": {"scheme": "magma"}, "title": "Sample Density Count"},
+            "row": {"field": "species", "type": "nominal", "title": "Species Row"}
+          }
+        };
+
+        // Render charts inside containers immediately
+        vegaEmbed('#chart1', spec1).catch(console.error);
+        vegaEmbed('#chart2', spec2).catch(console.error);
+        vegaEmbed('#chart3', spec3).catch(console.error);
+        vegaEmbed('#chart4', spec4).catch(console.error);
+
+        // JavaScript function to handle the expand/collapse toggle interaction
+        function togglePortfolio() {
+            const drawer = document.getElementById("portfolio1-drawer");
+            if (drawer.style.display === "block") {
+                drawer.style.display = "none";
+            } else {
+                drawer.style.display = "block";
