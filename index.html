@@ -13,7 +13,7 @@
         h1 { color: #111; }
         .assignment-list { margin-top: 20px; padding-left: 0; list-style-type: none; }
         
-        /* Interactive Toggle List Item Wrapper */
+        /* Interactive List Item Styling */
         .assignment-item { margin-bottom: 20px; border-radius: 5px; overflow: hidden; background: #99c3d1; }
         .assignment-toggle-btn { 
             width: 100%; 
@@ -31,7 +31,7 @@
         .assignment-toggle-btn:hover { background: #88b2c0; text-decoration: underline; }
         .assignment-subtitle { font-size: 0.75em; font-weight: normal; display: block; margin-top: 3px; color: #333; }
         
-        /* Collapsible content area (hidden by default) */
+        /* Hidden layout drawer container */
         .portfolio-one-content { 
             display: none; 
             background: #ffffff; 
@@ -40,13 +40,12 @@
             color: #333333; 
         }
         
-        /* Charts layout styles */
+        /* Layout structures for visual assets */
         .chart-block { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
         .chart-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .chart-container { width: 100%; overflow-x: auto; margin: 15px 0; }
+        .chart-container { width: 100%; overflow-x: auto; margin: 15px 0; min-height: 100px; }
         .description { font-size: 0.9em; line-height: 1.5; color: #444; }
         
-        /* Disabled items styling for portfolio 2 & 3 */
         .disabled-item { padding: 15px; background: #99c3d1; margin-bottom: 20px; border-radius: 5px; font-weight: bold; opacity: 0.7; }
     </style>
 </head>
@@ -58,14 +57,14 @@
         <h2>Portfolio Assignments</h2>
         <ul class="assignment-list">
             
-            <!-- Portfolio 1 Item with Click-to-Expand Feature -->
+            <!-- Portfolio 1 Interactive Module -->
             <li class="assignment-item">
                 <button class="assignment-toggle-btn" onclick="togglePortfolio()">
                     Portfolio 1: Penguin Species Visualizations
-                    <span class="assignment-subtitle">Click to expand/collapse interactive Vega-Lite charts exploration.</span>
+                    <span id="toggle-sub" class="assignment-subtitle">Click to expand and view interactive layouts ▼</span>
                 </button>
                 
-                <!-- Hidden Container until clicked -->
+                <!-- Content container (remains completely closed until toggled) -->
                 <div id="portfolio1-drawer" class="portfolio-one-content">
                     <p>This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data metrics. Each chart manipulates structural marks, scales, and dimensional axes to shift how the biological insights are communicated.</p>
                     
@@ -99,7 +98,6 @@
                 </div>
             </li>
             
-            <!-- Other Portfolio placeholders -->
             <li class="disabled-item">Portfolio 2</li>
             <li class="disabled-item">Portfolio 3</li>
         </ul>
@@ -110,73 +108,65 @@
     </div>
 
     <script>
-        // Use a CORS-safe web URL for seamless loading across all execution environments
-        const dataUrl = "https://githubusercontent.com";
+        // Inline dataset vector to remove file system fetch permissions blocks
+        const penguinDataset = [
+            {"species": "Adelie", "bill_length_mm": 39.1, "bill_depth_mm": 18.7},
+            {"species": "Adelie", "bill_length_mm": 39.5, "bill_depth_mm": 17.4},
+            {"species": "Adelie", "bill_length_mm": 40.3, "bill_depth_mm": 18.0},
+            {"species": "Adelie", "bill_length_mm": 36.7, "bill_depth_mm": 19.3},
+            {"species": "Adelie", "bill_length_mm": 39.3, "bill_depth_mm": 20.6},
+            {"species": "Adelie", "bill_length_mm": 38.9, "bill_depth_mm": 17.8},
+            {"species": "Adelie", "bill_length_mm": 39.2, "bill_depth_mm": 19.6},
+            {"species": "Adelie", "bill_length_mm": 41.1, "bill_depth_mm": 17.6},
+            {"species": "Chinstrap", "bill_length_mm": 46.5, "bill_depth_mm": 17.9},
+            {"species": "Chinstrap", "bill_length_mm": 50.0, "bill_depth_mm": 19.5},
+            {"species": "Chinstrap", "bill_length_mm": 51.3, "bill_depth_mm": 19.2},
+            {"species": "Chinstrap", "bill_length_mm": 45.4, "bill_depth_mm": 18.7},
+            {"species": "Chinstrap", "bill_length_mm": 52.8, "bill_depth_mm": 20.0},
+            {"species": "Chinstrap", "bill_length_mm": 46.6, "bill_depth_mm": 17.8},
+            {"species": "Chinstrap", "bill_length_mm": 51.7, "bill_depth_mm": 20.3},
+            {"species": "Gentoo", "bill_length_mm": 46.1, "bill_depth_mm": 13.2},
+            {"species": "Gentoo", "bill_length_mm": 50.0, "bill_depth_mm": 16.3},
+            {"species": "Gentoo", "bill_length_mm": 48.7, "bill_depth_mm": 14.1},
+            {"species": "Gentoo", "bill_length_mm": 50.0, "bill_depth_mm": 15.2},
+            {"species": "Gentoo", "bill_length_mm": 47.6, "bill_depth_mm": 14.5},
+            {"species": "Gentoo", "bill_length_mm": 46.5, "bill_depth_mm": 13.5},
+            {"species": "Gentoo", "bill_length_mm": 49.6, "bill_depth_mm": 14.1}
+        ];
 
-        // Chart Specs mapped to safe online keys (bill_length_mm, bill_depth_mm)
-        const spec1 = {
-          "$schema": "https://github.io",
-          "data": {"url": dataUrl},
-          "width": 400, "height": 300,
-          "mark": {"type": "point", "tooltip": true},
-          "encoding": {
-            "x": {"field": "bill_length_mm", "type": "quantitative", "title": "Culmen Length (mm)"},
-            "y": {"field": "bill_depth_mm", "type": "quantitative", "title": "Culmen Depth (mm)"},
-            "color": {"field": "species", "type": "nominal", "title": "Species"}
-          }
-        };
+        // Track if graphs have already generated to avoid unnecessary re-rendering loops
+        let chartsRendered = false;
 
-        const spec2 = {
-          "$schema": "https://github.io",
-          "data": {"url": dataUrl},
-          "facet": {"field": "species", "type": "nominal", "title": "Species Breakout"},
-          "spec": {
-            "width": 140, "height": 140,
-            "params": [{"name": "grid", "select": "interval", "bind": "scales"}],
-            "mark": {"type": "circle", "size": 60, "tooltip": true},
-            "encoding": {
-              "x": {"field": "bill_length_mm", "type": "quantitative", "scale": {"zero": false}, "title": "Culmen Length (mm)"},
-              "y": {"field": "bill_depth_mm", "type": "quantitative", "scale": {"zero": false}, "title": "Culmen Depth (mm)"},
-              "color": {"field": "species", "type": "nominal", "legend": null}
-            }
-          }
-        };
+        function renderAllCharts() {
+            if (chartsRendered) return;
 
-        const spec3 = {
-          "$schema": "https://github.io",
-          "data": {"url": dataUrl},
-          "width": 400, "height": 300,
-          "mark": {"type": "tick", "size": 30, "thickness": 2, "tooltip": true},
-          "encoding": {
-            "x": {"field": "species", "type": "nominal", "title": "Species Group"},
-            "y": {"field": "bill_depth_mm", "type": "quantitative", "title": "Culmen Depth (mm)"},
-            "color": {"field": "bill_length_mm", "type": "quantitative", "scale": {"scheme": "viridis"}, "title": "Culmen Length (mm)"}
-          }
-        };
+            const spec1 = {
+              "$schema": "https://github.io",
+              "data": {"values": penguinDataset},
+              "width": 400, "height": 300,
+              "mark": {"type": "point", "tooltip": true},
+              "encoding": {
+                "x": {"field": "bill_length_mm", "type": "quantitative", "title": "Culmen Length (mm)"},
+                "y": {"field": "bill_depth_mm", "type": "quantitative", "title": "Culmen Depth (mm)"},
+                "color": {"field": "species", "type": "nominal", "title": "Species"}
+              }
+            };
 
-        const spec4 = {
-          "$schema": "https://github.io",
-          "data": {"url": dataUrl},
-          "width": 400, "height": 250,
-          "mark": {"type": "rect", "tooltip": true},
-          "encoding": {
-            "x": {"field": "bill_length_mm", "type": "quantitative", "bin": {"maxbins": 15}, "title": "Binned Culmen Length (mm)"},
-            "y": {"field": "bill_depth_mm", "type": "quantitative", "bin": {"maxbins": 15}, "title": "Binned Culmen Depth (mm)"},
-            "color": {"aggregate": "count", "type": "quantitative", "scale": {"scheme": "magma"}, "title": "Sample Density Count"},
-            "row": {"field": "species", "type": "nominal", "title": "Species Row"}
-          }
-        };
+            const spec2 = {
+              "$schema": "https://github.io",
+              "data": {"values": penguinDataset},
+              "facet": {"field": "species", "type": "nominal", "title": "Species Breakout"},
+              "spec": {
+                "width": 130, "height": 130,
+                "params": [{"name": "grid", "select": "interval", "bind": "scales"}],
+                "mark": {"type": "circle", "size": 60, "tooltip": true},
+                "encoding": {
+                  "x": {"field": "bill_length_mm", "type": "quantitative", "scale": {"zero": false}, "title": "Length (mm)"},
+                  "y": {"field": "bill_depth_mm", "type": "quantitative", "scale": {"zero": false}, "title": "Depth (mm)"},
+                  "color": {"field": "species", "type": "nominal", "legend": null}
+                }
+              }
+            };
 
-        // Render charts inside containers immediately
-        vegaEmbed('#chart1', spec1).catch(console.error);
-        vegaEmbed('#chart2', spec2).catch(console.error);
-        vegaEmbed('#chart3', spec3).catch(console.error);
-        vegaEmbed('#chart4', spec4).catch(console.error);
-
-        // JavaScript function to handle the expand/collapse toggle interaction
-        function togglePortfolio() {
-            const drawer = document.getElementById("portfolio1-drawer");
-            if (drawer.style.display === "block") {
-                drawer.style.display = "none";
-            } else {
-                drawer.style.display = "block";
+            const spec3 = {
+              "$schema": "https://github.io",
