@@ -27,7 +27,7 @@
         }
         .assignment-toggle-btn:hover { background: #88b2c0; text-decoration: underline; }
         .assignment-subtitle { font-size: 0.75em; font-weight: normal; display: block; margin-top: 3px; color: #333; }
-        .portfolio-one-content { 
+        .portfolio-one-content, .portfolio-two-content { 
             background: #ffffff; 
             padding: 25px; 
             border-top: none; 
@@ -36,6 +36,9 @@
         .chart-block { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
         .chart-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .chart-container { width: 100%; overflow-x: auto; margin: 15px 0; display: flex; justify-content: center; }
+        .comparison-item { border: 1px solid #ddd; border-radius: 8px; padding: 15px; background: #fafafa; }
+        .comparison-item h4 { margin-top: 0; color: #555; }
+        .comparison-item img { max-width: 100%; height: auto; border-radius: 4px; }
         .description { font-size: 0.9em; line-height: 1.5; color: #444; }
         .disabled-item { padding: 15px; background: #99c3d1; margin-bottom: 20px; border-radius: 5px; font-weight: bold; opacity: 0.7; }
         .culmen-image { max-width: 420px; width: 100%; display: block; margin: 18px auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
@@ -57,17 +60,16 @@
         <h2>Portfolio Assignments</h2>
         <ul class="assignment-list">
             <li class="assignment-item">
-                <button class="assignment-toggle-btn" onclick="togglePortfolio()">
+                <button class="assignment-toggle-btn" onclick="togglePortfolio(1)">
                     Portfolio 1: Penguin Species Visualizations
-                    <span id="toggle-sub" class="assignment-subtitle">Click to collapse open views ▲</span>
+                    <span id="toggle-sub-1" class="assignment-subtitle">Click to expand ▼</span>
                 </button>
 
-                <div id="portfolio1-drawer" class="portfolio-one-content">
-                    <div class="intro-box">
-                    </div>
+                <div id="portfolio1-drawer" class="portfolio-one-content" style="display: none;">
+                    <div class="intro-box"></div>
 
                     <img class="culmen-image" src="https://data-enhanced.com/wp-content/uploads/2020/06/penguins-image.jpg" alt="Penguins graphic illustrating the data set">
-                    <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill. The lengthwise measurement from the base to the tip along the top of the beak. It is one of the standard measurements used to compare species and individual morphology.</p>
+                    <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill—the lengthwise measurement from the base to the tip along the top of the beak. It is one of the standard measurements used to compare species and individual morphology.</p>
 
                     <div class="chart-block">
                         <h3>Chart 1: Scatter Plot</h3>
@@ -76,7 +78,7 @@
                     </div>
 
                     <div class="chart-block">
-                        <h3>Variation 1: Smaller & Seprerate Scatter Plots</h3>
+                        <h3>Variation 1: Smaller &amp; Separate Scatter Plots</h3>
                         <div id="chart2" class="chart-container"></div>
                         <p class="description"><strong>Description:</strong> This variation uses small graphs moving each species into its own panel while preserving similar scale structure for each species.</p>
                     </div>
@@ -95,12 +97,42 @@
                 </div>
             </li>
 
-            <li class="disabled-item">Portfolio 2</li>
+            <li class="assignment-item">
+                <button class="assignment-toggle-btn" onclick="togglePortfolio(2)">
+                    Portfolio 2: Career Timeline Comparison
+                    <span id="toggle-sub-2" class="assignment-subtitle">Click to expand ▼</span>
+                </button>
+
+                <div id="portfolio2-drawer" class="portfolio-two-content" style="display: none;">
+                    <p>This portfolio compares a published visualization from The New York Times with a recreated version built using Vega-Lite code. The goal is to demonstrate how the same data story can be communicated through different tools and approaches.</p>
+
+                    <div class="chart-block">
+                        <h3>Original Visualization</h3>
+                        <div class="comparison-item">
+                            <h4>Source: The New York Times (2024)</h4>
+                            <img src="https://images.squarespace-cdn.com/content/v1/5c6eb2ba1b39cc000180eae0/1727042934944-YI4B5HVNYW0GPZX7FMHZ/image-1.png?format=2500w" alt="NYT Career Timeline Chart">
+                            <p class="description">The New York Times visualization showing the career progression of the 2024 presidential candidates (Trump, Vance, Harris, and Walz). This chart uses horizontal bar segments to represent different career phases colored by sector.</p>
+                        </div>
+                    </div>
+
+                    <div class="chart-block">
+                        <h3>Vega-Lite Recreation</h3>
+                        <div id="chart5" class="chart-container"></div>
+                        <p class="description"><strong>Recreation Process:</strong> I rebuilt this visualization using Vega-Lite to match the original layout and color scheme. The chart displays age on the x-axis and candidates on the y-axis, with colored bars representing their career phases in different sectors.</p>
+                    </div>
+
+                    <div class="chart-block">
+                        <h3>Comparison &amp; Analysis</h3>
+                        <p class="description"><strong>Design Decisions:</strong> Both versions tell the same story but with slightly different visual treatments. The Vega-Lite version maintains the core structure and interactivity, while making the data more accessible for further analysis and modification.</p>
+                    </div>
+                </div>
+            </li>
+
             <li class="disabled-item">Portfolio 3</li>
         </ul>
 
         <footer style="margin-top: 50px; font-size: 0.8em; color: #777; border-top: 1px solid #ccc; padding-top: 10px;">
-            <p>Portfolio template designed by me. Dataset sourced from Kaggle.</p>
+            <p>Portfolio template designed by me. Dataset sourced from Kaggle and The New York Times.</p>
         </footer>
     </div>
 
@@ -128,6 +160,26 @@
             {"species": "Gentoo", "bill_length_mm": 47.6, "bill_depth_mm": 14.5},
             {"species": "Gentoo", "bill_length_mm": 46.5, "bill_depth_mm": 13.5},
             {"species": "Gentoo", "bill_length_mm": 49.6, "bill_depth_mm": 14.1}
+        ];
+
+        const careerDataset = [
+            {"candidate": "Donald Trump", "start": 18, "end": 22, "category": "College"},
+            {"candidate": "Donald Trump", "start": 22, "end": 70, "category": "Private sector"},
+            {"candidate": "Donald Trump", "start": 70, "end": 74, "category": "Federal government"},
+            {"candidate": "Donald Trump", "start": 74, "end": 78, "category": "Candidate for federal office"},
+            {"candidate": "JD Vance", "start": 18, "end": 19, "category": "College"},
+            {"candidate": "JD Vance", "start": 19, "end": 23, "category": "Military"},
+            {"candidate": "JD Vance", "start": 23, "end": 27, "category": "College"},
+            {"candidate": "JD Vance", "start": 27, "end": 38, "category": "Private sector"},
+            {"candidate": "JD Vance", "start": 38, "end": 40, "category": "Candidate for federal office"},
+            {"candidate": "Kamala Harris", "start": 18, "end": 25, "category": "College"},
+            {"candidate": "Kamala Harris", "start": 25, "end": 52, "category": "Public service or politics"},
+            {"candidate": "Kamala Harris", "start": 52, "end": 56, "category": "Federal government"},
+            {"candidate": "Kamala Harris", "start": 56, "end": 60, "category": "Federal government"},
+            {"candidate": "Tim Walz", "start": 18, "end": 25, "category": "Military"},
+            {"candidate": "Tim Walz", "start": 25, "end": 42, "category": "Public service or politics"},
+            {"candidate": "Tim Walz", "start": 42, "end": 54, "category": "Federal government"},
+            {"candidate": "Tim Walz", "start": 54, "end": 60, "category": "Public service or politics"}
         ];
 
         const spec1 = {
@@ -186,25 +238,129 @@
           }
         };
 
-        const drawer = document.getElementById("portfolio1-drawer");
-        const subText = document.getElementById("toggle-sub");
+        const spec5 = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "Trump-Vance and Harris-Walz Career Timelines",
+            "subtitle": "Career Progression of the 2024 Presidential Candidates",
+            "anchor": "start",
+            "fontSize": 18,
+            "font": "Georgia, serif",
+            "fontWeight": "bold",
+            "offset": 15
+          },
+          "width": 650,
+          "height": 350,
+          "background": "white",
+          "padding": 20,
+          "data": {"values": careerDataset},
+          "encoding": {
+            "y": {
+              "field": "candidate",
+              "type": "nominal",
+              "title": null,
+              "axis": {
+                "labelAngle": 0,
+                "labelFontSize": 13,
+                "labelFontWeight": "bold",
+                "labelPadding": 12,
+                "grid": false,
+                "ticks": false,
+                "domain": false
+              },
+              "scale": {"paddingInner": 0.3}
+            },
+            "x": {
+              "field": "start",
+              "type": "quantitative",
+              "title": "Age",
+              "scale": {"domain": [18, 75]},
+              "axis": {
+                "values": [18, 25, 35, 45, 55, 65, 75],
+                "format": "d",
+                "titlePadding": 10,
+                "gridColor": "#e5e5e5",
+                "domain": false,
+                "ticks": false
+              }
+            },
+            "x2": {"field": "end"},
+            "color": {
+              "field": "category",
+              "type": "nominal",
+              "title": null,
+              "scale": {
+                "domain": [
+                  "College",
+                  "Private sector",
+                  "Federal government",
+                  "Military",
+                  "Public service or politics",
+                  "Candidate for federal office"
+                ],
+                "range": [
+                  "#e3fcfc",
+                  "#c2f1f2",
+                  "#a6e2e3",
+                  "#68b1b3",
+                  "#38888a",
+                  "#185152"
+                ]
+              },
+              "legend": {
+                "orient": "top",
+                "columns": 3,
+                "labelFontSize": 11,
+                "symbolType": "square",
+                "symbolSize": 400,
+                "offset": 20
+              }
+            },
+            "tooltip": [
+              {"field": "candidate", "title": "Candidate"},
+              {"field": "category", "title": "Sector"},
+              {"field": "start", "title": "From Age"},
+              {"field": "end", "title": "To Age"}
+            ]
+          },
+          "layer": [{
+            "mark": {
+              "type": "bar",
+              "stroke": "white",
+              "strokeWidth": 1.5
+            }
+          }],
+          "config": {"view": {"stroke": null}}
+        };
 
         function renderCharts() {
           vegaEmbed('#chart1', spec1, {"actions": false});
           vegaEmbed('#chart2', spec2, {"actions": false});
           vegaEmbed('#chart3', spec3, {"actions": false});
           vegaEmbed('#chart4', spec4, {"actions": false});
+          vegaEmbed('#chart5', spec5, {"actions": false});
         }
 
         renderCharts();
 
-        function togglePortfolio() {
-            if (drawer.style.display === "none") {
-                drawer.style.display = "block";
-                subText.innerText = "Click to collapse open views ▲";
-            } else {
-                drawer.style.display = "none";
-                subText.innerText = "Click to expand and view interactive layouts ▼";
+        function togglePortfolio(portfolio) {
+            const drawer1 = document.getElementById("portfolio1-drawer");
+            const drawer2 = document.getElementById("portfolio2-drawer");
+            const subText1 = document.getElementById("toggle-sub-1");
+            const subText2 = document.getElementById("toggle-sub-2");
+
+            if (portfolio === 1) {
+                const isOpen = drawer1.style.display !== "none";
+                drawer1.style.display = isOpen ? "none" : "block";
+                subText1.innerText = isOpen ? "Click to expand ▼" : "Click to collapse ▲";
+                drawer2.style.display = "none";
+                subText2.innerText = "Click to expand ▼";
+            } else if (portfolio === 2) {
+                const isOpen = drawer2.style.display !== "none";
+                drawer2.style.display = isOpen ? "none" : "block";
+                subText2.innerText = isOpen ? "Click to expand ▼" : "Click to collapse ▲";
+                drawer1.style.display = "none";
+                subText1.innerText = "Click to expand ▼";
             }
         }
     </script>
