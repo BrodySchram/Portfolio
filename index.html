@@ -134,7 +134,6 @@
             {"species": "Gentoo", "bill_length_mm": 49.6, "bill_depth_mm": 14.1}
         ];
 
-        // Track if graphs have already generated to avoid unnecessary re-rendering loops
         let chartsRendered = false;
 
         function renderAllCharts() {
@@ -170,3 +169,5 @@
 
             const spec3 = {
               "$schema": "https://github.io",
+              "data": {"values": penguinDataset},
+              "width": 400, "height": 250,
