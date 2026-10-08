@@ -89,9 +89,9 @@
                     </div>
 
                     <div class="chart-block">
-                        <h3>Variation 3: Binned Aggregation Matrix</h3>
+                        <h3>Variation 3: Simple Bar Chart</h3>
                         <div id="chart4" class="chart-container"></div>
-                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This layout shifts focus away from individual coordinates to macro statistical aggregates. Binning transforms the continuous fields into density counts, allowing the viewer to see where observations concentrate across species and dimension pairings.</p>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This bar chart aggregates the data by species, showing the average culmen depth for each penguin species. The simplicity of the bar mark makes it easy to compare species directly and identify which group has the deepest bills on average.</p>
                     </div>
                 </div>
             </li>
@@ -179,12 +179,11 @@
           "data": {"values": penguinDataset},
           "width": 550,
           "height": 400,
-          "mark": {"type": "rect", "tooltip": true},
+          "mark": {"type": "bar", "tooltip": true},
           "encoding": {
-            "x": {"field": "bill_length_mm", "type": "quantitative", "bin": {"maxbins": 10}, "title": "Binned Culmen Length (mm)"},
-            "y": {"field": "bill_depth_mm", "type": "quantitative", "bin": {"maxbins": 10}, "title": "Binned Culmen Depth (mm)"},
-            "color": {"aggregate": "count", "type": "quantitative", "scale": {"scheme": "magma"}, "title": "Sample Density Count"},
-            "row": {"field": "species", "type": "nominal", "title": "Species"}
+            "x": {"field": "species", "type": "nominal", "title": "Species"},
+            "y": {"aggregate": "mean", "field": "bill_depth_mm", "type": "quantitative", "title": "Average Culmen Depth (mm)"},
+            "color": {"field": "species", "type": "nominal", "legend": null}
           }
         };
 
