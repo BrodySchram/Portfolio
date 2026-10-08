@@ -16,7 +16,6 @@
         a { color: #000000; text-decoration: none; font-weight: bold; }
         a:hover { text-decoration: underline; }
         
-        /* New styling rules for the embedded chart section */
         .portfolio-one-content { background: #ffffff; margin-top: 15px; padding: 20px; border: 1px solid #ddd; border-radius: 5px; color: #333333; }
         .chart-block { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
         .chart-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
@@ -27,7 +26,7 @@
 <body>
     <div class="container">
         <h1>Data Visualization Portfolio</h1>
-        <p> Brody Schram</p>
+        <p>Brody Schram</p>
         
         <h2>Portfolio Assignments</h2>
         <ul class="assignment-list">
@@ -35,36 +34,35 @@
                 <a href="#portfolio1">Portfolio 1: Penguin Species Visualizations</a>
                 <br><small>Interactive species classification exploration using Vega-Lite configurations.</small>
                 
-                <!-- Embedded Chart Gallery Container -->
                 <div id="portfolio1" class="portfolio-one-content">
-                    <p>This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data metrics (Culmen Length, Culmen Depth, and Species). Each chart manipulates structural marks, scales, and dimensional axes to shift how the biological insights are communicated.</p>
+                    <p>This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data metrics. Each chart manipulates structural marks, scales, and dimensional axes to shift how the biological insights are communicated.</p>
                     
                     <!-- Chart 1 -->
                     <div class="chart-block">
                         <h3>Chart 1: The Basic Plot (Standard Scatter Plot)</h3>
                         <div id="chart1" class="chart-container"></div>
-                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This plot establishes the baseline relationship between physical attributes across different categorical groups. A scatter plot was chosen because it cleanly tracks two continuous metrics simultaneously across a nominal category using color. It effectively communicates that while there is overlap in raw values, species cluster neatly into distinct visual territories based on their skeletal proportions.</p>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This plot establishes the baseline relationship between physical attributes across different categorical groups. A scatter plot cleanly tracks two continuous metrics simultaneously across a nominal category using color.</p>
                     </div>
 
                     <!-- Chart 2 -->
                     <div class="chart-block">
                         <h3>Variation 1: Faceted Grid &amp; Zoomable Axis Scale</h3>
                         <div id="chart2" class="chart-container"></div>
-                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This variation addresses overplotting by utilizing small-multiples structural faceting, moving the categorical dimension from color encoding to a spatial split. The scale config maximizes screen real estate by wrapping strictly around the active coordinate window, and the added interval selection lets users zoom and scroll inside the grids. It shifts communication away from mixed group boundaries toward isolating internal distributions and density patterns within each standalone species.</p>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This variation addresses overplotting by utilizing small-multiples structural faceting, moving the species dimension from color encoding to separate charts. The zoom feature lets users scale into the grids directly.</p>
                     </div>
 
                     <!-- Chart 3 -->
                     <div class="chart-block">
                         <h3>Variation 2: Swapped Dimensions &amp; Color Map Heatmap</h3>
                         <div id="chart3" class="chart-container"></div>
-                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> For this iteration, the position roles were intentionally re-prioritized. One numeric axis was completely swapped out for the categorical feature, while the displaced numeric metric was pushed onto a sequential color ramp (Viridis). Utilizing a high-thickness tick mark creates a barcode-style density visualization. It communicates comparative summaries much quicker than a scatter plot, allowing the viewer to immediately scan vertical density ranges while simultaneously tracing how long a penguin's bill grows along a uniform gradient.</p>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> One numeric axis is swapped out for the categorical species feature, while the displaced metric is pushed onto a color ramp (Viridis) to create a clear density visualization.</p>
                     </div>
 
                     <!-- Chart 4 -->
                     <div class="chart-block">
                         <h3>Variation 3: Binned Aggregation Matrix</h3>
                         <div id="chart4" class="chart-container"></div>
-                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This layout shifts focus away from granular individual observations to macro statistical aggregates. It divides both continuous fields into segmented boxes (bins) and encodes the statistical count using a high-contrast heatmap spectrum. Instead of relying on individual data coordinates to show species habits, it transforms the subset into structured matrix zones. This makes it significantly easier to communicate the single most common biological sweet-spot (highest frequency concentration) for each respective type.</p>
+                        <p class="description"><strong>Decision-Making Process &amp; Communication:</strong> This layout shifts focus away from individual coordinates to macro statistical aggregates. It divides the fields into grids and encodes sample count frequencies using a heatmap spectrum.</p>
                     </div>
                 </div>
             </li>
@@ -78,12 +76,10 @@
         </footer>
     </div>
 
-    <!-- Script execution block to inject the live charts into the HTML placeholders -->
     <script>
-        // Define your data source path here (ensure this file is in your directory)
+        // Make sure this file name matches your CSV file exactly and is located in the same directory!
         const csvUrl = "Penguin Species Prediction Dataset.csv";
 
-        // Chart 1 Specification
         const spec1 = {
           "$schema": "https://github.io",
           "data": {"url": csvUrl},
@@ -96,13 +92,12 @@
           }
         };
 
-        // Chart 2 Specification
         const spec2 = {
           "$schema": "https://github.io",
           "data": {"url": csvUrl},
           "facet": {"field": "species", "type": "nominal", "title": "Species Breakout"},
           "spec": {
-            "width": 160, "height": 160,
+            "width": 150, "height": 150,
             "params": [{"name": "grid", "select": "interval", "bind": "scales"}],
             "mark": {"type": "circle", "size": 60, "tooltip": true},
             "encoding": {
@@ -113,7 +108,6 @@
           }
         };
 
-        // Chart 3 Specification
         const spec3 = {
           "$schema": "https://github.io",
           "data": {"url": csvUrl},
@@ -126,10 +120,10 @@
           }
         };
 
-        // Chart 4 Specification
         const spec4 = {
           "$schema": "https://github.io",
           "data": {"url": csvUrl},
+          "width": 400, "height": 250,
           "mark": {"type": "rect", "tooltip": true},
           "encoding": {
             "x": {"field": "culmen_length_mm", "type": "quantitative", "bin": {"maxbins": 15}, "title": "Binned Culmen Length (mm)"},
@@ -139,11 +133,11 @@
           }
         };
 
-        // Embed charts into divs
-        vegaEmbed('#chart1', spec1);
-        vegaEmbed('#chart2', spec2);
-        vegaEmbed('#chart3', spec3);
-        vegaEmbed('#chart4', spec4);
+        // Render charts to DOM
+        vegaEmbed('#chart1', spec1).catch(console.error);
+        vegaEmbed('#chart2', spec2).catch(console.error);
+        vegaEmbed('#chart3', spec3).catch(console.error);
+        vegaEmbed('#chart4', spec4).catch(console.error);
     </script>
 </body>
 </html>
