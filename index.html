@@ -36,12 +36,11 @@
         .chart-block { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
         .chart-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .chart-container { width: 100%; overflow-x: auto; margin: 15px 0; display: flex; justify-content: center; }
-        .comparison-item { border: 1px solid #ddd; border-radius: 8px; padding: 15px; background: #fafafa; }
+        .comparison-item { border: 1px solid #ddd; border-radius: 8px; padding: 15px; background: #fafafa; margin-bottom: 20px; }
         .comparison-item h4 { margin-top: 0; color: #555; }
-        .comparison-item img { max-width: 100%; height: auto; border-radius: 4px; }
+        .comparison-item img { max-width: 100%; height: auto; border-radius: 4px; display: block; }
         .description { font-size: 0.9em; line-height: 1.5; color: #444; }
         .disabled-item { padding: 15px; background: #99c3d1; margin-bottom: 20px; border-radius: 5px; font-weight: bold; opacity: 0.7; }
-        .culmen-image { max-width: 420px; width: 100%; display: block; margin: 18px auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
         .intro-box {
             background: #eef8fb;
             border-left: none;
@@ -66,31 +65,32 @@
                 </button>
 
                 <div id="portfolio1-drawer" class="portfolio-one-content" style="display: none;">
-                    <div class="intro-box"></div>
+                    <div class="intro-box">
+                        <strong>About this portfolio:</strong> This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data metrics. Each chart manipulates structural marks, scales, and encodings to tell different stories from the same data.
+                    </div>
 
-                    <img class="culmen-image" src="https://data-enhanced.com/wp-content/uploads/2020/06/penguins-image.jpg" alt="Penguins graphic illustrating the data set">
                     <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill—the lengthwise measurement from the base to the tip along the top of the beak. It is one of the standard measurements used to compare species and individual morphology.</p>
 
                     <div class="chart-block">
                         <h3>Chart 1: Scatter Plot</h3>
                         <div id="chart1" class="chart-container"></div>
-                        <p class="description"><strong> Description:</strong> This plot showcases the relationship between physical attributes across different penguin species.</p>
+                        <p class="description"><strong>Description:</strong> This plot showcases the relationship between culmen length and depth across different penguin species. Each point represents an individual penguin, colored by species to highlight natural groupings.</p>
                     </div>
 
                     <div class="chart-block">
                         <h3>Variation 1: Smaller &amp; Separate Scatter Plots</h3>
                         <div id="chart2" class="chart-container"></div>
-                        <p class="description"><strong>Description:</strong> This variation uses small graphs moving each species into its own panel while preserving similar scale structure for each species.</p>
+                        <p class="description"><strong>Description:</strong> This variation uses small graphs moving each species into its own panel while preserving similar scale structure for each species. This approach reduces overplotting and makes within-species patterns more visible.</p>
                     </div>
 
                     <div class="chart-block">
-                        <h3>Variation 2: Swapped Dimensions &amp; Color Map Heatmap</h3>
+                        <h3>Variation 2: Swapped Dimensions &amp; Color Encoding</h3>
                         <div id="chart3" class="chart-container"></div>
-                        <p class="description"><strong> Description:</strong> The numeric axis is swapped out for the categorical species feature, while the displaced measure is encoded by color. This arrangement emphasizes group-level differences and how a categorical variable can structure the distribution.</p>
+                        <p class="description"><strong>Description:</strong> The numeric x-axis is swapped out for the categorical species feature, while culmen length is encoded by color. This arrangement emphasizes group-level differences and how color can encode a quantitative measure.</p>
                     </div>
 
                     <div class="chart-block">
-                        <h3>Variation 3: Simple Bar Chart</h3>
+                        <h3>Variation 3: Bar Chart Aggregation</h3>
                         <div id="chart4" class="chart-container"></div>
                         <p class="description"><strong>Description:</strong> This bar chart shows the average culmen depth for each penguin species. The bar mark makes direct comparisons easy and highlights which species have the deepest bills on average.</p>
                     </div>
@@ -104,13 +104,13 @@
                 </button>
 
                 <div id="portfolio2-drawer" class="portfolio-two-content" style="display: none;">
-                    <p>This portfolio compares a published visualization from The New York Times with a recreated version built using Vega-Lite code. The goal is to demonstrate how the same data story can be communicated through different tools and approaches.</p>
+                    <p class="description">This portfolio compares a published visualization from The New York Times with a recreated version built using Vega-Lite code. The goal is to demonstrate how the same data story can be communicated through different tools and approaches.</p>
 
                     <div class="chart-block">
                         <h3>Original Visualization</h3>
                         <div class="comparison-item">
                             <h4>Source: The New York Times (2024)</h4>
-                            <img src="https://images.squarespace-cdn.com/content/v1/5c6eb2ba1b39cc000180eae0/1727042934944-YI4B5HVNYW0GPZX7FMHZ/image-1.png?format=2500w" alt="NYT Career Timeline Chart">
+                            <img src="https://images.squarespace-cdn.com/content/v1/5c6eb2ba1b39cc000180eae0/1727042934944-YI4B5HVNYW0GPZX7FMHZ/image-1.png?format=2500w" alt="NYT Career Timeline Chart showing Trump-Vance and Harris-Walz career progressions">
                             <p class="description">The New York Times visualization showing the career progression of the 2024 presidential candidates (Trump, Vance, Harris, and Walz). This chart uses horizontal bar segments to represent different career phases colored by sector.</p>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
 
                     <div class="chart-block">
                         <h3>Comparison &amp; Analysis</h3>
-                        <p class="description"><strong>Design Decisions:</strong> Both versions tell the same story but with slightly different visual treatments. The Vega-Lite version maintains the core structure and interactivity, while making the data more accessible for further analysis and modification.</p>
+                        <p class="description"><strong>Design Decisions:</strong> Both versions tell the same story but with slightly different visual treatments. The Vega-Lite version maintains the core structure and interactivity, while making the data more accessible for further analysis and modification. The color palette and bar layout closely mirror the original NYT design.</p>
                     </div>
                 </div>
             </li>
