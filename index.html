@@ -169,18 +169,18 @@
         };
 
         const spec4 = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "data": {"values": penguinDataset},
-          "width": 400,
-          "height": 250,
-          "mark": {"type": "rect", "tooltip": true},
-          "encoding": {
-            "x": {"field": "bill_length_mm", "type": "quantitative", "bin": {"maxbins": 10}, "title": "Binned Culmen Length (mm)"},
-            "y": {"field": "bill_depth_mm", "type": "quantitative", "bin": {"maxbins": 10}, "title": "Binned Culmen Depth (mm)"},
-            "color": {"aggregate": "count", "type": "quantitative", "scale": {"scheme": "magma"}, "title": "Sample Density Count"},
-            "row": {"field": "species", "type": "nominal", "title": "Species"}
-          }
-        };
+  const spec3 = {
+"$schema": "github.io",
+"data": {"values": penguinDataset},
+"width": 400, "height": 250,
+"mark": {"type": "bar", "tooltip": true},
+"encoding": {
+"x": {"field": "species", "type": "nominal", "title": "Species Group"},
+"y": {"aggregate": "mean", "field": "bill_depth_mm", "type": "quantitative", "title": "Average Culmen Depth (mm)"},
+"color": {"field": "species", "type": "nominal", "legend": null}
+}
+    };
+    
 
         const drawer = document.getElementById("portfolio1-drawer");
         const subText = document.getElementById("toggle-sub");
