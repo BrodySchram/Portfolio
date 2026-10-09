@@ -48,6 +48,15 @@
             border-radius: 4px;
             color: #1e2d33;
         }
+        .penguin-hero {
+            display: block;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            border-radius: 8px;
+            background: #eef8fb;
+            border: 1px solid #d4ebf5;
+        }
         .portfolio2-row {
             display: flex;
             gap: 24px;
@@ -87,8 +96,9 @@
                 </button>
 
                 <div id="portfolio1-drawer" class="portfolio-one-content" style="display: none;">
+                    <img class="penguin-hero" src="assets/penguin-portfolio.svg" alt="Penguin species illustration">
                     <div class="intro-box">
-                        <strong>About this portfolio:</strong> This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data.
+                        <strong>About this portfolio:</strong> This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data metrics. Each chart is intentionally designed to answer a different question while preserving the same data foundation.
                     </div>
 
                     <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill—the lengthwise measurement from the base to the tip along the top of the bill. Comparing culmen length and depth helps reveal differences between species.</p>
@@ -126,14 +136,16 @@
                 </button>
 
                 <div id="portfolio2-drawer" class="portfolio-two-content" style="display: none;">
-                    <p class="description">Comparing the graphic made by New York Times and my version (if the image does not load on your end here is the link https://www.nytimes.com/interactive/2024/08/06/us/elections/trump-vance-harris-walz-education-career.html).</p>
+                    <p class="description">Comparing the graphic made by New York Times and my version. If the image does not load on your end, use the article link here: <a href="https://www.nytimes.com/interactive/2024/08/06/us/elections/trump-vance-harris-walz-education-career.html" target="_blank" rel="noopener noreferrer">The New York Times article</a>.</p>
 
                     <div class="chart-block portfolio2-row">
                         <div class="portfolio2-card">
                             <h3>Original Visualization</h3>
                             <div class="comparison-item">
                                 <h4>Source: The New York Times (2024)</h4>
-                                <img src="https://preview.redd.it/nyt-how-trump-vance-and-harris-walz-made-it-to-the-v0-9k25qhdme8hd1.jpeg?width=1080&crop=smart&auto=webp&s=90ab766d4df6055ad5817d4ae8772de97d97ac2" alt="New York Times career timeline visualization">
+                                <a href="https://www.nytimes.com/interactive/2024/08/06/us/elections/trump-vance-harris-walz-education-career.html" target="_blank" rel="noopener noreferrer">
+                                    <img src="assets/portfolio2-nyt-timeline.svg" alt="New York Times career timeline visualization">
+                                </a>
                                 <p class="description">The New York Times visualization showing the career progression of the 2024 presidential candidates.</p>
                             </div>
                         </div>
@@ -141,14 +153,13 @@
                         <div class="portfolio2-card">
                             <h3>Vega-Lite Recreation</h3>
                             <div id="chart5" class="chart-container"></div>
-                            <p class="description"><strong>Recreation Process:</strong> I rebuilt this visualization using Vega-Lite to improve the orginal design.</p>
+                            <p class="description"><strong>Recreation Process:</strong> I rebuilt this visualization using Vega-Lite to improve the original design.</p>
                         </div>
                     </div>
 
                     <div class="chart-block">
                         <h3></h3>
-                        <p class="description"><strong>Design Decisions:</strong> The original visualization is showing how the presidential candidates in 2024 progressed their careers. One of the issues with the original is the vertical format; it just looks off. However, a left to right horizontal format makes it seem a lot more like a timeline. Also the colors are a big issue there is a lot of green and grey that blend together and make it look confusing. The other colors outside of that give the viewer whiplash kinda too. The new colors give more of a distinction but also are not all over the place. There is also a title change so you have a better idea of what the data is supposed to represent. The key was also made a little bit bigger just to see the different colors and what they represent a little better. Also the spacing between ages is bigger because in the original there are some very small slivers and it can be hard to look at. Finally the color of the vertical age lines was changed just to make it a little bit more clear.
-.</p>
+                        <p class="description"><strong>Design Decisions:</strong> The original visualization is showing how the presidential candidates in 2024 progressed their careers. One of the main design tasks was to capture the age progression while also distinguishing each profession across life stages. The recreation keeps the same horizontal structure and color logic, while simplifying the labels and increasing readability.</p>
                     </div>
                 </div>
             </li>
