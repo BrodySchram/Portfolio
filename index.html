@@ -27,7 +27,7 @@
         }
         .assignment-toggle-btn:hover { background: #88b2c0; text-decoration: underline; }
         .assignment-subtitle { font-size: 0.75em; font-weight: normal; display: block; margin-top: 3px; color: #333; }
-        .portfolio-one-content, .portfolio-two-content {
+        .portfolio-one-content, .portfolio-two-content, .portfolio-three-content, .portfolio-four-content {
             background: #ffffff;
             padding: 25px;
             border-top: none;
@@ -75,9 +75,6 @@
         .portfolio2-card .chart-container {
             margin: 0;
         }
-       
-            }
-        }
     </style>
 </head>
 <body>
@@ -99,30 +96,30 @@
                         <strong>About this portfolio:</strong> This section features 1 basic scatter plot and 3 systematic variations built from the exact same underlying penguin data.
                     </div>
 
-                    <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill. The lengthwise measurement from the base to the tip along the top of the bill. Comparing culmen length and depth helps reveal differences between species.</p>
+                    <p class="description"><strong>What is a culmen?</strong> In penguin research, the culmen is the upper ridge of the bill. The lengthwise measurement from the base to the tip along the upper ridge is used to compare species and evaluate structural differences.</p>
 
                     <div class="chart-block">
                         <h3>Chart 1: Scatter Plot</h3>
                         <div id="chart1" class="chart-container"></div>
-                        <p class="description"><strong>Description:</strong> This plot showcases the relationship between culmen length and depth across different penguin species. Each point represents one penguin observation and is colored by species to highlight clustering patterns.</p>
+                        <p class="description"><strong>Description:</strong> This plot showcases the relationship between culmen length and depth across different penguin species. Each point represents an individual penguin, and species are separated by color to reveal group clustering.</p>
                     </div>
 
                     <div class="chart-block">
                         <h3>Variation 1: Smaller &amp; Separate Scatter Plots</h3>
                         <div id="chart2" class="chart-container"></div>
-                        <p class="description"><strong>Description:</strong> This variation uses small graphs moving each species into its own panel while preserving similar scale structure for each species. This allows an easier comparison of within-species patterns without visual clutter.</p>
+                        <p class="description"><strong>Description:</strong> This variation uses small graphs moving each species into its own panel while preserving a similar scale structure for each species. This makes direct comparisons easier without overcrowding the plot.</p>
                     </div>
 
                     <div class="chart-block">
                         <h3>Variation 2: Swapped Dimensions &amp; Color Encoding</h3>
                         <div id="chart3" class="chart-container"></div>
-                        <p class="description"><strong>Description:</strong> The numeric x-axis is swapped out for the categorical species feature, while culmen length is encoded by color. This arrangement emphasizes species differences and the distribution of depth values within groups.</p>
+                        <p class="description"><strong>Description:</strong> The numeric x-axis is swapped out for the categorical species feature, while culmen length is encoded by color. This arrangement highlights distributional differences across species in a compact view.</p>
                     </div>
 
                     <div class="chart-block">
                         <h3>Variation 3: Bar Chart Aggregation</h3>
                         <div id="chart4" class="chart-container"></div>
-                        <p class="description"><strong>Description:</strong> This bar chart shows the average culmen depth for each penguin species. The bar mark makes direct comparisons easy and highlights the species-level group differences in a simplified, digestible form.</p>
+                        <p class="description"><strong>Description:</strong> This bar chart shows the average culmen depth for each penguin species. The bar mark makes direct comparisons easy and highlights how species differ in the average value.</p>
                     </div>
                 </div>
             </li>
@@ -134,7 +131,7 @@
                 </button>
 
                 <div id="portfolio2-drawer" class="portfolio-two-content" style="display: none;">
-                    <p class="description">Comparing the graphic made by New York Times and my version. If the image does not load on your end, use the article link here: <a href="https://www.nytimes.com/interactive/2024/08/06/us/elections/trump-vance-harris-walz-education-career.html" target="_blank" rel="noopener noreferrer">The New York Times article</a>.</p>
+                    <p class="description">Comparing the graphic made by The New York Times and my version. If the image does not load, use the article link here: <a href="https://www.nytimes.com/interactive/2024/08/06/us/elections/trump-vance-harris-walz-education-career.html" target="_blank" rel="noopener noreferrer">Original article</a>.</p>
 
                     <div class="chart-block portfolio2-row">
                         <div class="portfolio2-card">
@@ -151,21 +148,44 @@
                         <div class="portfolio2-card">
                             <h3>Vega-Lite Recreation</h3>
                             <div id="chart5" class="chart-container"></div>
-                            <p class="description"><strong>Recreation Process:</strong> I rebuilt this visualization using Vega-Lite to improve the original design.</p>
+                            <p class="description"><strong>Recreation Process:</strong> I rebuilt this visualization in Vega-Lite to improve the original design and make the timeline easier to read.</p>
                         </div>
                     </div>
 
                     <div class="chart-block">
-                        <h3></h3>
-                        <p class="description"><strong>Design Decisions:</strong> The original visualization is showing how the presidential candidates in 2024 progressed their careers. One of the issues with the original is the vertical format; it just looks off. However, a left to right horizontal format makes it seem a lot more like a timeline. Also the colors are a big issue there is a lot of green and grey that blend together and make it look confusing. The other colors outside of that give the viewer whiplash kinda too. The new colors give more of a distinction but also are not all over the place. There is also a title change so you have a better idea of what the data is supposed to represent. The key was also made a little bit bigger just to see the different colors and what they represent a little better. Also the spacing between ages is bigger because in the original there are some very small slivers and it can be hard to look at. Finally the color of the vertical age lines was changed just to make it a little bit more clear.
-
-
- </p>
+                        <h3>Design Notes</h3>
+                        <p class="description"><strong>Design Decisions:</strong> The original visualization shows how the 2024 presidential candidates progressed through different stages of their careers. One issue with the original layout is that the timing is harder to compare visually across candidates because the categories are packed and each row has a different narrative arc. My recreation keeps the same chronological story but makes it easier to compare age ranges and sector transitions across all four candidates.</p>
                     </div>
                 </div>
             </li>
 
-            <li class="disabled-item">Portfolio 3</li>
+            <li class="assignment-item">
+                <button class="assignment-toggle-btn" onclick="togglePortfolio(3)">
+                    Portfolio 3: Data Storytelling Concept
+                    <span id="toggle-sub-3" class="assignment-subtitle">Click to expand ▼</span>
+                </button>
+
+                <div id="portfolio3-drawer" class="portfolio-three-content" style="display: none;">
+                    <div class="intro-box">
+                        <strong>Coming soon:</strong> This portfolio slot is reserved for a future data story or redesign project.
+                    </div>
+                    <p class="description">Add a new chart, narrative, or interaction here when you're ready to showcase a third project.</p>
+                </div>
+            </li>
+
+            <li class="assignment-item">
+                <button class="assignment-toggle-btn" onclick="togglePortfolio(4)">
+                    Portfolio 4: Future Visualization
+                    <span id="toggle-sub-4" class="assignment-subtitle">Click to expand ▼</span>
+                </button>
+
+                <div id="portfolio4-drawer" class="portfolio-four-content" style="display: none;">
+                    <div class="intro-box">
+                        <strong>New portfolio slot:</strong> Use this space for another project, case study, or personal data visualization.
+                    </div>
+                    <p class="description">This is a placeholder for the next assignment. Replace this text with a dataset, design explanation, and charts when you are ready.</p>
+                </div>
+            </li>
         </ul>
 
         <footer style="margin-top: 50px; font-size: 0.8em; color: #777; border-top: 1px solid #ccc; padding-top: 10px;">
@@ -381,23 +401,29 @@
         renderCharts();
 
         function togglePortfolio(portfolio) {
-            const drawer1 = document.getElementById("portfolio1-drawer");
-            const drawer2 = document.getElementById("portfolio2-drawer");
-            const subText1 = document.getElementById("toggle-sub-1");
-            const subText2 = document.getElementById("toggle-sub-2");
+            const drawers = {
+                1: document.getElementById("portfolio1-drawer"),
+                2: document.getElementById("portfolio2-drawer"),
+                3: document.getElementById("portfolio3-drawer"),
+                4: document.getElementById("portfolio4-drawer")
+            };
+            const labels = {
+                1: document.getElementById("toggle-sub-1"),
+                2: document.getElementById("toggle-sub-2"),
+                3: document.getElementById("toggle-sub-3"),
+                4: document.getElementById("toggle-sub-4")
+            };
 
-            if (portfolio === 1) {
-                const isOpen = drawer1.style.display !== "none";
-                drawer1.style.display = isOpen ? "none" : "block";
-                subText1.innerText = isOpen ? "Click to expand ▼" : "Click to collapse ▲";
-                drawer2.style.display = "none";
-                subText2.innerText = "Click to expand ▼";
-            } else if (portfolio === 2) {
-                const isOpen = drawer2.style.display !== "none";
-                drawer2.style.display = isOpen ? "none" : "block";
-                subText2.innerText = isOpen ? "Click to expand ▼" : "Click to collapse ▲";
-                drawer1.style.display = "none";
-                subText1.innerText = "Click to expand ▼";
+            const isOpen = drawers[portfolio].style.display !== "none";
+
+            Object.keys(drawers).forEach((key) => {
+                drawers[key].style.display = "none";
+                labels[key].innerText = "Click to expand ▼";
+            });
+
+            if (!isOpen) {
+                drawers[portfolio].style.display = "block";
+                labels[portfolio].innerText = "Click to collapse ▲";
             }
         }
     </script>
