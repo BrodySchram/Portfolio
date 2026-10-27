@@ -161,7 +161,7 @@ DOCTYPE html>
 
             <li class="assignment-item">
                 <button class="assignment-toggle-btn" onclick="togglePortfolio(3)">
-                    Portfolio 3: Cats Are Better Than Dogs
+                    Portfolio 3: Pineapple on Pizza/
                     <span id="toggle-sub-3" class="assignment-subtitle">Click to expand ▼</span>
                 </button>
 
@@ -172,6 +172,89 @@ DOCTYPE html>
                     <p class="description"></p>
                 </div>
             </li>
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Most Brits love pineapple on pizza!",
+  "width": 400,
+  "height": 300,
+  "data": {
+    "values": [
+      {"Response": "Like", "Percentage": 53},
+      {"Response": "Dislike", "Percentage": 41},
+      {"Response": "Don't know", "Percentage": 6}
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "color": "#4C9F70"
+  },
+  "encoding": {
+    "x": {
+      "field": "Response",
+      "type": "nominal",
+      "axis": {
+        "title": "Opinion"
+      }
+    },
+    "y": {
+      "field": "Percentage",
+      "type": "quantitative",
+      "scale": {
+        "domain": [50, 55],
+        "zero": false
+      },
+      "axis": {
+        "title": "Percentage (%)",
+        "tickCount": 6
+      }
+    },
+    "tooltip": [
+      {"field": "Response"},
+      {"field": "Percentage", "type": "quantitative"}
+    ]
+  }
+}
+            
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Pineapple on pizza is hated by Brits!",
+  "width": 400,
+  "height": 300,
+  "data": {
+    "values": [
+      {"Response": "Dislike", "Percentage": 41},
+      {"Response": "Don't know", "Percentage": 6}
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "color": "#D9534F"
+  },
+  "encoding": {
+    "x": {
+      "field": "Response",
+      "type": "nominal",
+      "axis": {
+        "title": "Opinion"
+      }
+    },
+    "y": {
+      "field": "Percentage",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 45]
+      },
+      "axis": {
+        "title": "Percentage (%)",
+        "tickCount": 6
+      }
+    },
+    "tooltip": [
+      {"field": "Response"},
+      {"field": "Percentage", "type": "quantitative"}
+    ]
+  }
+}
 
             <li class="assignment-item">
                 <button class="assignment-toggle-btn" onclick="togglePortfolio(4)">
