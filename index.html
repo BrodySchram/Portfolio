@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -161,100 +161,28 @@ DOCTYPE html>
 
             <li class="assignment-item">
                 <button class="assignment-toggle-btn" onclick="togglePortfolio(3)">
-                    Portfolio 3: Pineapple on Pizza/
+                    Portfolio 3: Pineapple on Pizza
                     <span id="toggle-sub-3" class="assignment-subtitle">Click to expand ▼</span>
                 </button>
 
                 <div id="portfolio3-drawer" class="portfolio-three-content" style="display: none;">
                     <div class="intro-box">
-                        
+                        <strong>About this chart:</strong> A simple opinion poll showing how British people feel about pineapple on pizza.
                     </div>
-                    <p class="description"></p>
+
+                    <div class="chart-block">
+                        <h3>Chart 1: Overall Opinion Breakdown</h3>
+                        <div id="chart6" class="chart-container"></div>
+                        <p class="description"><strong>Description:</strong> The majority of respondents said they like pineapple on pizza, while a sizeable minority disliked it.</p>
+                    </div>
+
+                    <div class="chart-block">
+                        <h3>Chart 2: Dislike vs. Uncertainty</h3>
+                        <div id="chart7" class="chart-container"></div>
+                        <p class="description"><strong>Description:</strong> This comparison isolates the less favorable responses to emphasize the portion of people who either dislike pineapple on pizza or are unsure.</p>
+                    </div>
                 </div>
             </li>
-{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Most Brits love pineapple on pizza!",
-  "width": 400,
-  "height": 300,
-  "data": {
-    "values": [
-      {"Response": "Like", "Percentage": 53},
-      {"Response": "Dislike", "Percentage": 41},
-      {"Response": "Don't know", "Percentage": 6}
-    ]
-  },
-  "mark": {
-    "type": "bar",
-    "color": "#4C9F70"
-  },
-  "encoding": {
-    "x": {
-      "field": "Response",
-      "type": "nominal",
-      "axis": {
-        "title": "Opinion"
-      }
-    },
-    "y": {
-      "field": "Percentage",
-      "type": "quantitative",
-      "scale": {
-        "domain": [50, 55],
-        "zero": false
-      },
-      "axis": {
-        "title": "Percentage (%)",
-        "tickCount": 6
-      }
-    },
-    "tooltip": [
-      {"field": "Response"},
-      {"field": "Percentage", "type": "quantitative"}
-    ]
-  }
-}
-            
-{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Pineapple on pizza is hated by Brits!",
-  "width": 400,
-  "height": 300,
-  "data": {
-    "values": [
-      {"Response": "Dislike", "Percentage": 41},
-      {"Response": "Don't know", "Percentage": 6}
-    ]
-  },
-  "mark": {
-    "type": "bar",
-    "color": "#D9534F"
-  },
-  "encoding": {
-    "x": {
-      "field": "Response",
-      "type": "nominal",
-      "axis": {
-        "title": "Opinion"
-      }
-    },
-    "y": {
-      "field": "Percentage",
-      "type": "quantitative",
-      "scale": {
-        "domain": [0, 45]
-      },
-      "axis": {
-        "title": "Percentage (%)",
-        "tickCount": 6
-      }
-    },
-    "tooltip": [
-      {"field": "Response"},
-      {"field": "Percentage", "type": "quantitative"}
-    ]
-  }
-}
 
             <li class="assignment-item">
                 <button class="assignment-toggle-btn" onclick="togglePortfolio(4)">
@@ -264,6 +192,8 @@ DOCTYPE html>
 
                 <div id="portfolio4-drawer" class="portfolio-four-content" style="display: none;">
                     <div class="intro-box">
+                        <strong>Placeholder:</strong> Add your next visualization here.
+                    </div>
                 </div>
             </li>
         </ul>
@@ -317,6 +247,17 @@ DOCTYPE html>
             {"candidate": "Tim Walz", "start": 25, "end": 42, "category": "Public service or politics"},
             {"candidate": "Tim Walz", "start": 42, "end": 54, "category": "Federal government"},
             {"candidate": "Tim Walz", "start": 54, "end": 60, "category": "Public service or politics"}
+        ];
+
+        const pineappleOverall = [
+            {"Response": "Like", "Percentage": 53},
+            {"Response": "Dislike", "Percentage": 41},
+            {"Response": "Don't know", "Percentage": 6}
+        ];
+
+        const pineappleNegative = [
+            {"Response": "Dislike", "Percentage": 41},
+            {"Response": "Don't know", "Percentage": 6}
         ];
 
         const spec1 = {
@@ -470,12 +411,58 @@ DOCTYPE html>
           "config": {"view": {"stroke": null}}
         };
 
+        const spec6 = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": "Most Brits love pineapple on pizza!",
+          "width": 420,
+          "height": 300,
+          "data": {"values": pineappleOverall},
+          "mark": {"type": "bar", "color": "#4C9F70"},
+          "encoding": {
+            "x": {"field": "Response", "type": "nominal", "axis": {"title": "Opinion"}},
+            "y": {
+              "field": "Percentage",
+              "type": "quantitative",
+              "scale": {"domain": [0, 60], "zero": false},
+              "axis": {"title": "Percentage (%)", "tickCount": 6}
+            },
+            "tooltip": [
+              {"field": "Response"},
+              {"field": "Percentage", "type": "quantitative"}
+            ]
+          }
+        };
+
+        const spec7 = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": "Pineapple on pizza is hated by the minority!",
+          "width": 420,
+          "height": 300,
+          "data": {"values": pineappleNegative},
+          "mark": {"type": "bar", "color": "#D9534F"},
+          "encoding": {
+            "x": {"field": "Response", "type": "nominal", "axis": {"title": "Opinion"}},
+            "y": {
+              "field": "Percentage",
+              "type": "quantitative",
+              "scale": {"domain": [0, 45]},
+              "axis": {"title": "Percentage (%)", "tickCount": 6}
+            },
+            "tooltip": [
+              {"field": "Response"},
+              {"field": "Percentage", "type": "quantitative"}
+            ]
+          }
+        };
+
         function renderCharts() {
           vegaEmbed('#chart1', spec1, {"actions": false});
           vegaEmbed('#chart2', spec2, {"actions": false});
           vegaEmbed('#chart3', spec3, {"actions": false});
           vegaEmbed('#chart4', spec4, {"actions": false});
           vegaEmbed('#chart5', spec5, {"actions": false});
+          vegaEmbed('#chart6', spec6, {"actions": false});
+          vegaEmbed('#chart7', spec7, {"actions": false});
         }
 
         renderCharts();
