@@ -1,0 +1,44 @@
+<div class="chart-block">
+            <label for="portfolio4-before-first"><strong>Text before the first image:</strong></label>
+            <textarea id="portfolio4-before-first" class="description" rows="4" style="width:100%; box-sizing:border-box; margin-top:10px; padding:10px;"></textarea>
+        </div>
+
+        <div class="chart-block">
+            <img src="assets/Screenshot%202026-11-17%20195401.png" alt="Datawrapper screenshot 1" style="width:100%;">
+            <div class="description" contenteditable="true" style="margin-top:10px; min-height:80px;"></div>
+        </div>
+
+        <div class="chart-block">
+            <img src="assets/Screenshot%202026-11-17%20195632.png" alt="Datawrapper screenshot 2" style="width:100%;">
+            <div class="description" contenteditable="true" style="margin-top:10px; min-height:80px;"></div>
+        </div>
+
+        <div class="chart-block">
+            <img src="assets/Screenshot%202026-11-17%20200217.png" alt="Datawrapper screenshot 3" style="width:100%;">
+            <div class="description" contenteditable="true" style="margin-top:10px; min-height:80px;"></div>
+        </div>
+
+        <div class="chart-block">
+            <img src="assets/Screenshot%202026-11-17%20200559.png" alt="Datawrapper screenshot 4" style="width:100%;">
+            <div class="description" contenteditable="true" style="margin-top:10px; min-height:80px;"></div>
+        </div>
+
+        <div class="chart-block">
+            <img src="assets/Screenshot%202026-11-17%20200652.png" alt="Datawrapper screenshot 5" style="width:100%;">
+            <div class="description" contenteditable="true" style="margin-top:10px; min-height:80px;"></div>
+        </div>
+
+        <div class="chart-block">
+            <img src="assets/Screenshot%202026-11-17%20200748.png" alt="Datawrapper screenshot 6" style="width:100%;">
+            <div class="description" contenteditable="true" style="margin-top:10px; min-height:80px;"></div>
+        </div>
+
+        <div class="chart-block">
+            <img src="assets/Screenshot%202026-11-17%20200840.png" alt="Datawrapper screenshot 7" style="width:100%;">
+            <div class="description" contenteditable="true" style="margin-top:10px; min-height:80px;"></div>
+        </div>
+
+        <div class="chart-block">
+            <label for="portfolio4-after-last"><strong>Text after the last image:</strong></label>
+            <textarea id="portfolio4-after-last" class="description" rows="4" style="width:100%; box-sizing:border-box; margin-top:10px; padding:10px;"></textarea>
+        </div>
